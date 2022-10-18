@@ -1,14 +1,13 @@
 #include <stdlib.h>
-
 #include <time.h>
-
 #include <stdio.h>
 
 /**
+ * main - entry point
  *
- * main - Entry point
  *
- * Return: Always return 0
+ * Return: always return 0
+ *
  */
 int main(void)
 {
@@ -31,3 +30,4 @@ int main(void)
 	}
 	return (0);
 }
+
