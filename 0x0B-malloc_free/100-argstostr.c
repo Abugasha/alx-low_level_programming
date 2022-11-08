@@ -1,46 +1,39 @@
-#include "main.h"
 #include <stdio.h>
 #include <stdlib.h>
 /**
- * argstostr - gives array of args
- * @ac: argument count
- * @av: array of arguments
- * Return: char value
+ *argstostr - allocate matrix in the form of memory
+ *@ac: matrix col
+ *@av: matrix row
+ *Return: matrix
  */
 char *argstostr(int ac, char **av)
 {
-	int size;
-	char *s;
-	int i;
-	int j;
-	int k;
+	char *array;
+	int i = 0, row = 0, count = 0, acum = 0, bu = 0;
 
-	if (ac == 0 || av == NULL)
+	if (ac == 0 || av  == NULL)
 		return (NULL);
-
 	for (i = 0; i < ac; i++)
 	{
-		for (j = 0; av[i][j] != '\0'; j++)
-			size++;
+		while (av[i][count] != 0)
+			count++;
+		acum = count + acum;
+		count = 0;
 	}
-
-	size += (ac + 1);
-	s = malloc(sizeof(char) * size);
-	if (s == NULL)
+	acum = acum + i + 1;
+	array = (char *)malloc(acum * sizeof(char));
+	if (array == NULL)
 		return (NULL);
-	k = 0;
-	for (i = 0; i < ac; i++)
+	for (row = 0; row < ac; row++)
 	{
-		for (j = 0; av[i][j] != '\0'; j++)
+		while (av[row][count])
 		{
-			s[k] = av[i][j];
-			k++;
+			array[bu + count] = av[row][count];
+			count++;
 		}
-		s[k] = '\n';
-		k++;
+		array[bu + count] = '\n';
+		bu = count + 1 + bu;
+		count = 0;
 	}
-
-	s[k] = '\0';
-
-	return (s);
+	return (array);
 }
