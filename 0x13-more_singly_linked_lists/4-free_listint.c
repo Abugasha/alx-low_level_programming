@@ -1,19 +1,17 @@
 #include "lists.h"
 /**
- * free_listint - frees the list
- * @head: head of struct
- *
+ *free_listint - free list
+ *@head: pointer to the first elements of the list
+ *Return: Quantity of nodes in the list
  */
 void free_listint(listint_t *head)
 {
-	listint_t *tmp;
-
+	void *tmp;
 
 	while (head != NULL)
 	{
 		tmp = head;
-		free(head);
-		head = tmp->next;
+		head = head->next;
+		free(tmp);
 	}
-
 }
