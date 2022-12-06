@@ -1,28 +1,30 @@
 #include "main.h"
 /**
- *create_file - creates a file
- *@filename: name of the file
- *@text_content: null terminated string
- *Return: 1 success, -1 failure
+ * create_file - creates a file
+ * @filename: filename to grab
+ * @text_content: content to add
+ * Return: int value
  */
 int create_file(const char *filename, char *text_content)
 {
-	int fd, rd_error, result;
+	int fd, len = 0;
+	long int wrote;
 
 	if (filename == NULL)
 		return (-1);
-	fd = open(filename, O_CREAT | O_RDWR | O_TRUNC, S_IRUSR | S_IWUSR);
+	fd = open(filename, O_CREAT | O_RDWR | O_TRUNC, 0600);
 	if (fd == -1)
 		return (-1);
 	if (text_content != NULL)
 	{
-		while (*(text_content + rd_error))
-			rd_error++;
-		result = write(fd, text_content, rd_error);
+
+		while (text_content[len])
+			len++;
+		wrote = write(fd, text_content, len);
+		if (wrote == -1)
+			return (-1);
 	}
-	close(fd);
-	if (result >= 0)
-		return (1);
-	else
+	if (close(fd) == -1)
 		return (-1);
+	return (1);
 }
